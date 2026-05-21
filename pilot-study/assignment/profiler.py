@@ -8,12 +8,12 @@ import sys
 
 import autograder.question
 import edq.util.json
-import pacai.util.reflection
+import edq.util.pyimport
 
 THIS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 
 def run(args):
-    build_question_scoring_map = pacai.util.reflection.fetch(args.build_question_scoring_map)
+    build_question_scoring_map = edq.util.pyimport.fetch(args.build_question_scoring_map)
     question_name_to_question_fuction_dict = build_question_scoring_map(args.submission)
 
     assignment_profile_json = {}

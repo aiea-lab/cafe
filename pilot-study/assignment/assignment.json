@@ -1,5 +1,5 @@
 {
-    "id": "asgn",
+    "id": "assignment",
     "name": "Breadth First Search",
     "static-files": [
         "../../requirements.txt",

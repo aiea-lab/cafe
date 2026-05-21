@@ -42,7 +42,7 @@ class TC1(autograder.question.Question):
         try:
             student_path = student_bfs(root, goal, frontier)
         except NotImplementedError:
-            question.fail('NotImplementedError')
+            self.fail('NotImplementedError')
 
         if (frontier._num_pop == 2 and student_path == ["root", "child_1", "goal"]):
             self.full_credit()

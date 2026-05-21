@@ -10,8 +10,10 @@ function main() {
         -s test-submissions/solution \
         -o solution_profile.json
 
+    echo "Setup Succeeded"
+
     return $?
-}
+    }
 
 [[ "${BASH_SOURCE[0]}" == "${0}" ]] && main "$@"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly THIS_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd | xargs realpath)"
 readonly ATTEMPTS_DIR="$THIS_DIR/attempts"
 
 function main() {
@@ -19,7 +19,7 @@ function main() {
     cp submission/solution.py $ATTEMPTS_DIR/$COUNT
     ./grader.py -s submission/ -t $ATTEMPTS_DIR/$COUNT
 
-    echo "Created: $BASE_DIR/$COUNT"
+    echo -e "\nLogged attempt #$COUNT to $ATTEMPTS_DIR/$COUNT"
     return $?
 }
 
