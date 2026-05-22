@@ -14,11 +14,14 @@ class BFS(autograder.assignment.Assignment):
     def __init__(self, **kwargs):
         super().__init__(
             questions = [
-                TC1(1, 'loop'),
-            ], **kwargs)
+                TC1(1, 'cycle'),
+            ],
+            additional_data = {"is_explain": True},
+            **kwargs)
+
 
 class TC1(autograder.question.Question):
-    def score_question(self, submission):
+    def score_question(self, submission, is_explain):
         student_bfs = submission.__all__.BFS
 
         root = util.Node("root")
@@ -51,7 +54,9 @@ class TC1(autograder.question.Question):
         if (util._explored_node_count == 4  and student_path == ["root", "child_1", "grand_child", "goal"]):
             self.full_credit()
         else:
-            feedback = explainer.generate_feedback(self)
+            feedback = ""
+            if (is_explain):
+                feedback += explainer.generate_feedback(self)
             self.fail(feedback)
 
 def profile_target_with_timeout(input_dir):
@@ -65,6 +70,7 @@ def _create_profile_target(assignment_class, input_dir, use_timeout):
     num_questions = len(assignment_class()._questions)
     for i in range(num_questions):
         assignment = assignment_class(input_dir = input_dir)
+        assignment._additional_data = {"is_explain": False}
         question = assignment._questions[i]
 
         if (not use_timeout):
