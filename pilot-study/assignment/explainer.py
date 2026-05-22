@@ -34,6 +34,7 @@ def generate_feedback(question_object):
     student_assignment_profile = edq.util.json.load_path(STUDENT_PROFILE_OUTPATH)
     student_question_profile = student_assignment_profile[question_object.name]
 
+    # TODO(Batu): Error Message (I dont see the file did you urn setup.sh)
     solution_assignment_profile = edq.util.json.load_path(SOLUTION_PROFILE_OUTPATH)
     solution_question_profile = solution_assignment_profile[question_object.name]
 
@@ -47,9 +48,9 @@ def generate_feedback(question_object):
             union_functions_called.add(function)
 
     delta_dict = {}
-    feedback += f"|{'Function':<70} | {'Expected':<10} | {'Your Code':<10} | {'Delta':<10} | \n"
+    feedback += f"| {'Function':<70} | {'Expected':<10} | {'Your Code':<10} | {'Delta':<10} | \n"
     for function in union_functions_called:
-        clean_function_name = function.replace(THIS_DIR, "")
+        clean_function_name = function.replace(THIS_DIR + os.sep, "")
 
         solution_call_num = solution_question_profile.get(function, 0)
         student_call_num = student_question_profile.get(function, 0)
@@ -62,5 +63,5 @@ def generate_feedback(question_object):
     for i in range(min(len(sorted_delta_dict), NUM_TO_DISPLAY)):
         (key, value) = sorted_delta_dict[i]
         (solution, student, delta) = value
-        feedback += f"|{key:<70} | {solution:<10} | {student:<10} | {delta:<10} |\n"
+        feedback += f"| {key:<70} | {solution:<10} | {student:<10} | {delta:<10} |\n"
     return feedback

@@ -6,10 +6,13 @@ function main() {
     set -e
     trap exit SIGINT
 
+    cp test-submissions/solution/solution.py submission/solution.py
+
     ./profiler.py grader.profile_target_without_timeout \
-        -s test-submissions/solution \
+        -s $THIS_DIR/submission\
         -o solution_profile.json
 
+    cp test-submissions/not_implemented/solution.py submission/solution.py
     echo "Complete Setup."
 
     return $?

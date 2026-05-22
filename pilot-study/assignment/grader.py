@@ -50,6 +50,13 @@ class TC1(autograder.question.Question):
             student_path = student_bfs(root, goal)
         except NotImplementedError:
             self.fail('NotImplementedError')
+        # TODO(Batu): Change e to ex
+        except Exception as e:
+            feedback = ""
+            if (is_explain):
+                feedback += explainer.generate_feedback(self)
+            feedback += "\nException:\n" + str(e)
+            self.fail(feedback)
 
         if (util._explored_node_count == 4  and student_path == ["root", "child_1", "grand_child", "goal"]):
             self.full_credit()

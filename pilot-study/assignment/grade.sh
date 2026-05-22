@@ -17,7 +17,7 @@ function main() {
     mkdir "$ATTEMPTS_DIR/$COUNT"
 
     cp submission/solution.py $ATTEMPTS_DIR/$COUNT
-    ./grader.py -s submission/ -t $ATTEMPTS_DIR/$COUNT
+    ./grader.py -s submission/ -o $ATTEMPTS_DIR/$COUNT/info.json 2>&1 | tee $ATTEMPTS_DIR/$COUNT/output.log
 
     echo -e "\nLogged attempt #$COUNT to $ATTEMPTS_DIR/$COUNT"
     return $?
