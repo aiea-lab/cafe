@@ -3,7 +3,7 @@
 import sys
 import traceback
 
-import graph
+import util
 import explainer
 
 import autograder.assignment
@@ -21,10 +21,11 @@ class TC1(autograder.question.Question):
     def score_question(self, submission):
         student_bfs = submission.__all__.BFS
 
-        root = graph.Node("root")
-        child_1 = graph.Node("child_1")
-        child_2 = graph.Node("child_2")
-        goal = graph.Node("goal")
+        root = util.Node("root")
+        child_1 = util.Node("child_1")
+        child_2 = util.Node("child_2")
+        grand_child = util.Node("grand_child")
+        goal = util.Node("goal")
 
         root.neighbors.append(child_1)
         child_1.neighbors.append(root)
@@ -32,19 +33,22 @@ class TC1(autograder.question.Question):
         root.neighbors.append(child_2)
         child_2.neighbors.append(root)
 
-        child_1.neighbors.append(goal)
-        goal.neighbors.append(child_1)
+        child_1.neighbors.append(grand_child)
+        grand_child.neighbors.append(child_1)
 
-        child_2.neighbors.append(goal)
-        goal.neighbors.append(child_2)
+        child_2.neighbors.append(grand_child)
+        grand_child.neighbors.append(child_2)
 
-        frontier = graph.Queue()
+        grand_child.neighbors.append(goal)
+        goal.neighbors.append(grand_child)
+
         try:
-            student_path = student_bfs(root, goal, frontier)
+            util._expanded_node_count = 0
+            student_path = student_bfs(root, goal)
         except NotImplementedError:
             self.fail('NotImplementedError')
 
-        if (frontier._num_pop == 2 and student_path == ["root", "child_1", "goal"]):
+        if (util._explored_node_count == 4  and student_path == ["root", "child_1", "grand_child", "goal"]):
             self.full_credit()
         else:
             feedback = explainer.generate_feedback(self)

@@ -10,7 +10,7 @@ function main() {
         -s test-submissions/solution \
         -o solution_profile.json
 
-    echo "Setup Succeeded"
+    echo "Complete Setup."
 
     return $?
     }

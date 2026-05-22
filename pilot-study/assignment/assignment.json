@@ -3,7 +3,7 @@
     "name": "Breadth First Search",
     "static-files": [
         "../../requirements.txt",
-        "graph.py",
+        "util.py",
         "grader.py"
     ],
     "image": "ghcr.io/edulinq/grader.python:0.1.0.3-ubuntu22.04",

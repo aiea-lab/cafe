@@ -59,8 +59,8 @@ def generate_feedback(question_object):
             delta_dict[clean_function_name] = (solution_call_num, student_call_num, delta)
     sorted_delta_dict = sorted(delta_dict.items(), key=lambda item: abs(item[1][2]), reverse=True)
 
-    for i in range(NUM_TO_DISPLAY):
+    for i in range(min(len(sorted_delta_dict), NUM_TO_DISPLAY)):
         (key, value) = sorted_delta_dict[i]
         (solution, student, delta) = value
-        feedback += f"|{key:<70} | {solution:<10} | {student:<10}| {delta:<10} |\n"
+        feedback += f"|{key:<70} | {solution:<10} | {student:<10} | {delta:<10} |\n"
     return feedback
