@@ -1,4 +1,4 @@
-import graph
+import util
 
-def BFS(initial_node, goal_node, frontier):
+def BFS(initial_node, goal_node):
     raise NotImplementedError
