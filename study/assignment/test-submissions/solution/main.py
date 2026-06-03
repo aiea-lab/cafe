@@ -1,0 +1,67 @@
+class Node:
+    def __init__(self, label, neighbors = None):
+        self.label = label
+
+        if (neighbors is None):
+            neighbors = []
+
+        self.neighbors = neighbors
+
+    def __repr__(self):
+        neighbor_labels = [neighbor.label for neighbor in self.neighbors]
+        neighbors = ",".join(neighbor_labels)
+
+        return f"Node(label = {self.label}, neighbors = [{neighbors}])"
+
+    def __eq__(self, other):
+        return self.label == other.label
+
+    def __hash__(self):
+        return hash(self.label)
+
+class Queue:
+    nodes_explored  = 0
+    def __init__(self):
+        self._items = []
+
+    def __len__(self) -> int:
+        """ Override the len() operator to get the size of the queue. """
+
+        return len(self._items)
+
+    def enqueue(self, item):
+        """ Enqueue the item into the queue. """
+
+        Queue.nodes_explored += 1
+        self._items.insert(0, item)
+
+    def dequeue(self):
+        """ Dequeue the earliest enqueued item still in the queue. """
+
+        return self._items.pop()
+
+    def is_empty(self):
+        """ Returns True if the queue is empty. """
+
+        return len(self._items) == 0
+
+def BFS(initial_node, goal_node):
+    frontier = Queue()
+
+    if initial_node == goal_node:
+        return []
+
+    frontier.enqueue((list([initial_node.label]), initial_node))
+    visited = set({initial_node})
+
+    while (not frontier.is_empty()):
+        (path, node) = frontier.dequeue()
+        for neighbor in node.neighbors:
+            neighbor_path = path + [neighbor.label]
+            if (neighbor == goal_node):
+                return neighbor_path
+            if neighbor not in visited:
+                visited.add(neighbor)
+                frontier.enqueue((neighbor_path, neighbor))
+
+    raise ValueError("No solution Found.")

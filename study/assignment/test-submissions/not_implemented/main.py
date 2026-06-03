@@ -1,5 +1,3 @@
-_explored_node_count = 0
-
 class Node:
     def __init__(self, label, neighbors = None):
         self.label = label
@@ -22,6 +20,7 @@ class Node:
         return hash(self.label)
 
 class Queue:
+    nodes_explored  = 0
     def __init__(self):
         self._items = []
 
@@ -33,9 +32,7 @@ class Queue:
     def enqueue(self, item):
         """ Enqueue the item into the queue. """
 
-        global _explored_node_count
-        _explored_node_count += 1
-
+        Queue.nodes_explored += 1
         self._items.insert(0, item)
 
     def dequeue(self):
@@ -47,3 +44,6 @@ class Queue:
         """ Returns True if the queue is empty. """
 
         return len(self._items) == 0
+
+def BFS(initial_node, goal_node):
+    raise NotImplementedError

@@ -1,0 +1,47 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "build",
+    "packaging>=21.3",
+    "setuptools>=60",
+    "setuptools-scm>=8.0",
+    "twine",
+    "vermin",
+]
+
+[project]
+name = "aiea-cafe"
+description = "Concrete Analysis for Explanations (CAFE) is a framework for delivering personalized feedback based on concrete code analysis."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+
+authors = [
+    {name = "Batuhan Salih", email = "basalih@ucsc.edu"},
+]
+
+keywords = ['education', 'grading']
+classifiers = [
+    'Intended Audience :: Education',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3.10',
+]
+
+dynamic = [
+    "version",
+    "dependencies",
+    "optional-dependencies",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "cafe.__version__"}
+dependencies = {file = ["requirements.txt"]}
+optional-dependencies = {dev = {file = ["requirements-dev.txt"]}}
+
+[project.urls]
+Homepage = "https://github.com/aiea-lab/cafe"
+Repository = "https://github.com/aiea-lab/cafe"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cafe*"]
