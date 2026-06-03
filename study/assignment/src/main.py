@@ -61,6 +61,7 @@ def BFS(initial_node, goal_node):
             if (neighbor == goal_node):
                 return neighbor_path
             if neighbor not in visited:
+                visited.add(neighbor)
                 frontier.enqueue((neighbor_path, neighbor))
 
     raise ValueError("No solution Found.")

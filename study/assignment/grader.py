@@ -56,7 +56,7 @@ class TC1(autograder.question.Question):
         else:
             feedback = ""
             if (is_explain):
-                feedback += cafe.explainer.generate_feedback(input_dir, BFS, self, "solution.json")
+                feedback += cafe.explainer.generate_feedback(input_dir, BFS, self, "solution_profile.json")
             self.fail(feedback)
 
 def main():
