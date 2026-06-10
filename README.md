@@ -1,6 +1,6 @@
 # CAFE
 Concrete Analysis for Explanations (CAFE) is a framework for delivering personalized feedback based on concrete code analysis.
-CAFE is built on top of the [autograder-py Python package](https://github.com/edulinq/autograder-py),
+CAFE is built on top of the [autograder-py](https://github.com/edulinq/autograder-py) python package,
 and uses the assignment and question objects it defines.
 
 ## Documentation
