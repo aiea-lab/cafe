@@ -44,9 +44,9 @@ python3 -m cafe.cli.explain solution.json buggy-submission.json
 
 The output looks something like this:
 ```sh
-| Function                                                               | Expected   | Your Code  | Delta      |
-| <grading-dir>/main.py:__hash__                                         | 12         | 9          | 3          |
-| <grading-dir>/main.py:enqueue                                          | 4          | 7          | -3         |
+| Function                                  | Expected   | Your Code  | Delta      |
+| <grading-dir>/main.py:__hash__            | 12         | 9          | 3          |
+| <grading-dir>/main.py:enqueue             | 4          | 7          | -3         |
 
 ```
 
