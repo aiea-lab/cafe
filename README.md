@@ -3,9 +3,6 @@ Concrete Analysis for Explanations (CAFE) is a framework for delivering personal
 CAFE is built on top of the [autograder-py](https://github.com/edulinq/autograder-py) python package,
 and uses the assignment and question objects it defines.
 
-## Documentation
-TODO: Release documentation after first release.
-
 ## Installation / Requirements
 
 This project requires [Python](https://www.python.org/) >= 3.10.
@@ -24,10 +21,33 @@ To profile a submission to an assignment you can run:
 ```sh
 python3 -m cafe.cli.profile -s <submission-dir> <qulaified-assignment-ref>
 ```
-To analys two submission you can run:
+The output looks something like this:
+
+```json
+{
+    "TC1": {
+        "<python-standard>:ast.py:parse": 1
+        "<python-packages>:autograder/assignment:__init__": 1
+        "<submission-dir>:main.py:<module>": 2
+        "<python-builtin>::_codecs.utf_8_decode": 3
+        "<python-core>::_io._IOBase.__exit__": 1
+        .....
+    }
+}
+```
+
+To analyse two submission you can run:
 
 ```sh
-python3 -m cafe.cli.explain submission-1.json submission-2.json
+python3 -m cafe.cli.explain solution.json buggy-submission.json
+```
+
+The output looks something like this:
+```sh
+| Function                                                               | Expected   | Your Code  | Delta      |
+| <grading-dir>/main.py:__hash__                                         | 12         | 9          | 3          |
+| <grading-dir>/main.py:enqueue                                          | 4          | 7          | -3         |
+
 ```
 
 ## Resources
