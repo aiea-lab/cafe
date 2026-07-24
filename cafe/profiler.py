@@ -5,7 +5,8 @@ import pstats
 import edq.util.json
 import edq.util.pyimport
 
-GRADING_DIR = '<grading-dir>'
+SUBMISSION_DIR = '<submission-dir>'
+
 def profile_submission(submission_dir, assignment_obj, question_obj = None):
 
     if (not submission_dir.endswith(os.sep)):
@@ -29,7 +30,7 @@ def profile_submission(submission_dir, assignment_obj, question_obj = None):
         question_profile_json = {}
         for func, (_, number_of_calls, _, _, _) in stats.stats.items():
             file_path, _, func_name = func
-            file_path = file_path.replace(submission_dir, GRADING_DIR + os.sep)
+            file_path = file_path.replace(submission_dir, SUBMISSION_DIR + os.sep)
             question_profile_json[f'{file_path}:{func_name}'] = number_of_calls
 
         assignment_profile_json[question_name] = question_profile_json
