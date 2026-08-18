@@ -51,10 +51,13 @@ class TC1(autograder.question.Question):
         except NotImplementedError:
             self.fail('NotImplementedError')
 
-        if (submission.__all__.Queue.nodes_explored == 4  and student_path == ["root", "child_1", "grand_child", "goal"]):
+        expected_explored_count = 4
+        actual_explored_count = submission.__all__.Queue.nodes_explored
+
+        if (actual_explored_count == expected_explored_count  and student_path == ["root", "child_1", "grand_child", "goal"]):
             self.full_credit()
         else:
-            feedback = ""
+            feedback = f"Wrong number of nodes expanded.\n Expected: {expected_explored_count}, Actual: {actual_explored_count}\n"
             if (is_explain):
                 feedback += cafe.explainer.generate_feedback(input_dir, BFS, self, "solution_profile.json")
             self.fail(feedback)

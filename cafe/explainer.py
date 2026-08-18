@@ -34,11 +34,11 @@ def generate_feedback(
 
     union_functions_called = set()
     for function in solution_question_profile:
-        if (cafe.profiler.GRADING_DIR in function):
+        if (cafe.profiler.SUBMISSION_DIR in function):
             union_functions_called.add(function)
 
     for function in student_question_profile:
-        if (cafe.profiler.GRADING_DIR in function):
+        if (cafe.profiler.SUBMISSION_DIR in function):
             union_functions_called.add(function)
     delta_dict = {}
     feedback += f"| {'Function':<70} | {'Expected':<10} | {'Your Code':<10} | {'Delta':<10} |\n"
