@@ -39,14 +39,14 @@ def profile_submission(submission_dir, assignment_obj, question_obj = None):
 
 def _create_profile_target(assignment_class, submission_dir):
     profiler_target = {}
-    num_questions = len(assignment_class()._questions)
+    num_questions = len(assignment_class().questions)
     for i in range(num_questions):
         assignment = assignment_class(input_dir = submission_dir)
         assignment._additional_data = {"is_explain": False, "input_dir": submission_dir}
-        question = assignment._questions[i]
+        question = assignment.questions[i]
         question._timeout = None
 
         assignment.questions = [question]
-        profiler_target[type(assignment._questions[0]).__name__] = assignment.grade
+        profiler_target[type(assignment.questions[0]).__name__] = assignment.grade
 
     return profiler_target

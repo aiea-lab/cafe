@@ -14,7 +14,7 @@ class BFS(autograder.assignment.Assignment):
         input_dir = kwargs.get('input_dir', '.')
         super().__init__(
             questions = [
-                TC1(1, 'cycle'),
+                TC1(1, 'cycle', timeout=None),
             ],
             additional_data = {"is_explain": True, "input_dir": input_dir},
             **kwargs)
