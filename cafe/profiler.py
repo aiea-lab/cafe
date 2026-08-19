@@ -42,7 +42,7 @@ def _create_profile_target(assignment_class, submission_dir):
     num_questions = len(assignment_class().questions)
     for i in range(num_questions):
         assignment = assignment_class(input_dir = submission_dir)
-        assignment._additional_data = {"is_explain": False, "input_dir": submission_dir}
+        assignment._additional_data = {"input_dir": submission_dir}
         question = assignment.questions[i]
         question._timeout = None
 

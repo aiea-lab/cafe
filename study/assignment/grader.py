@@ -8,6 +8,7 @@ import autograder.question
 import autograder.cmd.gradeassignment
 
 import cafe.explainer
+import cafe.settings
 
 class BFS(autograder.assignment.Assignment):
     def __init__(self,  **kwargs):
@@ -16,11 +17,11 @@ class BFS(autograder.assignment.Assignment):
             questions = [
                 TC1(1, 'cycle', timeout=None),
             ],
-            additional_data = {"is_explain": True, "input_dir": input_dir},
+            additional_data = {"input_dir": input_dir},
             **kwargs)
 
 class TC1(autograder.question.Question):
-    def score_question(self, submission, is_explain, input_dir):
+    def score_question(self, submission, input_dir):
         student_bfs = submission.__all__.BFS
         Node = submission.__all__.Node
 
@@ -57,13 +58,27 @@ class TC1(autograder.question.Question):
         if (actual_explored_count == expected_explored_count  and student_path == ["root", "child_1", "grand_child", "goal"]):
             self.full_credit()
         else:
-            feedback = f"Wrong number of nodes expanded.\n Expected: {expected_explored_count}, Actual: {actual_explored_count}\n"
-            if (is_explain):
+            feedback = f"Wrong number of nodes expanded.\nExpected: {expected_explored_count}, Actual: {actual_explored_count}\n"
+
+            if (cafe.settings.is_generate_feedback_enabled()):
                 feedback += cafe.explainer.generate_feedback(input_dir, BFS, self, "solution_profile.json")
+
             self.fail(feedback)
 
 def main():
-    return autograder.cmd.gradeassignment.main()
+    parser = autograder.cmd.gradeassignment._get_parser()
+
+    group = parser.add_argument_group('CAFE Options')
+
+    group.add_argument('--enable-cafe-feedback', dest = 'enable_cafe_feedback',
+        action = 'store_true', help = 'Enables CAFE to generate feedback.'
+    )
+
+    args, _ = parser.parse_known_args()
+
+    cafe.settings.set_generate_feedback_enabled(args.enable_cafe_feedback)
+
+    return autograder.cmd.gradeassignment.run(args)
 
 if (__name__ == '__main__'):
     sys.exit(main())

@@ -20,7 +20,7 @@ function main() {
 
     mkdir "$ATTEMPTS_DIR/$COUNT"
 
-    ./grader.py -s $SUBMISSION_DIR -o $ATTEMPTS_DIR/$COUNT/$INFO_FILENAME 2>&1 | tee $ATTEMPTS_DIR/$COUNT/$LOG_FILENAME
+    ./grader.py -s $SUBMISSION_DIR -o $ATTEMPTS_DIR/$COUNT/$INFO_FILENAME --enable-cafe-feedback 2>&1 | tee $ATTEMPTS_DIR/$COUNT/$LOG_FILENAME
     cp $SUBMISSION_DIR/$FILENAME $ATTEMPTS_DIR/$COUNT
 
     echo -e "\nLogged attempt #$COUNT to $ATTEMPTS_DIR/$COUNT"

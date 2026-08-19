@@ -2,6 +2,7 @@ import argparse
 import os
 
 import cafe.profiler
+import cafe.settings
 
 import edq.util.dirent
 import edq.util.json
@@ -19,10 +20,15 @@ def generate_feedback(
     if (not edq.util.dirent.exists(path_solution_profile)):
         raise ValueError("Solution profile JSON deosn't exist.")
 
+    if (cafe.settings.is_generate_feedback_called()):
+        return ""
+
     solution_profile_json = edq.util.json.load_path(path_solution_profile)
 
     if (path_student_profile is None):
+        cafe.settings.set_generate_feedback_called(False)
         student_profile_json = cafe.profiler.profile_submission(submission_dir, assignment_obj, question_object)
+        cafe.settings.set_generate_feedback_called(True)
     else:
         student_profile_json = edq.util.json.load_path(path_student_profile)
 
